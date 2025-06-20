@@ -16,7 +16,9 @@ module MCP
       end
 
       def to_h
-        { type: "object", properties: properties, required: required }
+        schema = { type: "object", properties: properties }
+        schema[:required] = required if required.any?
+        schema
       end
 
       def missing_required_arguments?(arguments)
