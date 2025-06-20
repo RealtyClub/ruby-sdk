@@ -11,7 +11,7 @@ module MCP
       end
 
       def to_h
-        { content:, isError: is_error }.compact
+        { content: content, isError: is_error }.compact
       end
     end
   end

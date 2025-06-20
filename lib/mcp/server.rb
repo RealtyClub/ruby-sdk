@@ -89,12 +89,12 @@ module MCP
     end
 
     def define_tool(name: nil, description: nil, input_schema: nil, annotations: nil, &block)
-      tool = Tool.define(name:, description:, input_schema:, annotations:, &block)
+      tool = Tool.define(name: name, description: description, input_schema: input_schema, annotations: annotations, &block)
       @tools[tool.name_value] = tool
     end
 
     def define_prompt(name: nil, description: nil, arguments: [], &block)
-      prompt = Prompt.define(name:, description:, arguments:, &block)
+      prompt = Prompt.define(name: name, description: description, arguments: arguments, &block)
       @prompts[prompt.name_value] = prompt
     end
 
@@ -196,8 +196,8 @@ module MCP
 
     def server_info
       @server_info ||= {
-        name:,
-        version:,
+        name: name,
+        version: version,
       }
     end
 
@@ -222,7 +222,7 @@ module MCP
       end
 
       arguments = request[:arguments]
-      add_instrumentation_data(tool_name:)
+      add_instrumentation_data(tool_name: tool_name)
 
       if tool.input_schema&.missing_required_arguments?(arguments)
         add_instrumentation_data(error: :missing_required_arguments)
@@ -246,7 +246,7 @@ module MCP
         call_params = tool_call_parameters(tool)
 
         if call_params.include?(:server_context)
-          tool.call(**arguments.transform_keys(&:to_sym), server_context:).to_h
+          tool.call(**arguments.transform_keys(&:to_sym), server_context: server_context).to_h
         else
           tool.call(**arguments.transform_keys(&:to_sym)).to_h
         end
@@ -267,12 +267,12 @@ module MCP
         raise RequestHandlerError.new("Prompt not found #{prompt_name}", request, error_type: :prompt_not_found)
       end
 
-      add_instrumentation_data(prompt_name:)
+      add_instrumentation_data(prompt_name: prompt_name)
 
       prompt_args = request[:arguments]
       prompt.validate_arguments!(prompt_args)
 
-      prompt.template(prompt_args, server_context:).to_h
+      prompt.template(prompt_args, server_context: server_context).to_h
     end
 
     def list_resources(request)
