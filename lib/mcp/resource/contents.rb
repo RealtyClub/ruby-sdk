@@ -12,7 +12,7 @@ module MCP
       end
 
       def to_h
-        { uri:, mime_type: }.compact
+        { uri: uri, mime_type: mime_type }.compact
       end
     end
 
