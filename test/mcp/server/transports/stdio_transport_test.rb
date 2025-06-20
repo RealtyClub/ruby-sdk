@@ -96,8 +96,8 @@ module MCP
             @transport.send(:handle_request, JSON.generate(request))
             response = JSON.parse(output.string, symbolize_names: true)
             assert_equal("2.0", response[:jsonrpc])
-            assert_nil(response[:id])
-            assert_nil(response[:result])
+            assert_equal("123", response[:id])
+            assert_empty(response[:result])
           ensure
             $stdout = original_stdout
           end
