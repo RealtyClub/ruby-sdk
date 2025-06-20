@@ -57,7 +57,7 @@ module MCP
         prompts: [@prompt],
         resources: [@resource],
         resource_templates: [@resource_template],
-        configuration:,
+        configuration: configuration,
       )
     end
 
@@ -207,7 +207,7 @@ module MCP
 
       response = @server.handle(request)
       assert_equal tool_response.to_h, response[:result]
-      assert_instrumentation_data({ method: "tools/call", tool_name: })
+      assert_instrumentation_data({ method: "tools/call", tool_name: tool_name })
     end
 
     test "#handle tools/call returns error if required tool arguments are missing" do
@@ -254,7 +254,7 @@ module MCP
       raw_response = @server.handle_json(request)
       response = JSON.parse(raw_response, symbolize_names: true) if raw_response
       assert_equal tool_response.to_h, response[:result] if response
-      assert_instrumentation_data({ method: "tools/call", tool_name: })
+      assert_instrumentation_data({ method: "tools/call", tool_name: tool_name })
     end
 
     test "#handle_json tools/call executes tool and returns result, when the tool is typed with Sorbet" do
@@ -670,7 +670,7 @@ module MCP
       configuration.instrumentation_callback = local_callback
       configuration.exception_reporter = local_exception_reporter
 
-      server = Server.new(name: "test_server", configuration:)
+      server = Server.new(name: "test_server", configuration: configuration)
 
       assert_equal local_callback, server.configuration.instrumentation_callback
       assert_equal local_exception_reporter, server.configuration.exception_reporter

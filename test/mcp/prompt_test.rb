@@ -122,7 +122,7 @@ module MCP
           description: "Hello, world!",
           messages: [
             Prompt::Message.new(role: "user", content: Content::Text.new("Hello, world!")),
-            Prompt::Message.new(role: "assistant", content:),
+            Prompt::Message.new(role: "assistant", content: content),
           ],
         )
       end
