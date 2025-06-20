@@ -15,7 +15,7 @@ module MCP
 
       def to_h
         {
-          title:,
+          title: title,
           readOnlyHint: read_only_hint,
           destructiveHint: destructive_hint,
           idempotentHint: idempotent_hint,

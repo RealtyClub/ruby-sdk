@@ -12,7 +12,7 @@ module MCP
       end
 
       def to_h
-        { role:, content: content.to_h }.compact
+        { role: role, content: content.to_h }.compact
       end
     end
   end

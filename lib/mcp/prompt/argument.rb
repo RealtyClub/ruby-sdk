@@ -14,7 +14,7 @@ module MCP
       end
 
       def to_h
-        { name:, description:, required: }.compact
+        { name: name, description: description, required: required }.compact
       end
     end
   end

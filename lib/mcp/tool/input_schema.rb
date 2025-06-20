@@ -16,7 +16,7 @@ module MCP
       end
 
       def to_h
-        { type: "object", properties:, required: }
+        { type: "object", properties: properties, required: required }
       end
 
       def missing_required_arguments?(arguments)

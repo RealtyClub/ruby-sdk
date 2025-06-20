@@ -12,7 +12,7 @@ module MCP
       end
 
       def to_h
-        { description:, messages: messages.map(&:to_h) }.compact
+        { description: description, messages: messages.map(&:to_h) }.compact
       end
     end
   end

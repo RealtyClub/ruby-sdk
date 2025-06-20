@@ -57,7 +57,7 @@ module MCP
         elsif value.is_a?(Hash)
           properties = value[:properties] || value["properties"] || {}
           required = value[:required] || value["required"] || []
-          @input_schema_value = InputSchema.new(properties:, required:)
+          @input_schema_value = InputSchema.new(properties: properties, required: required)
         elsif value.is_a?(InputSchema)
           @input_schema_value = value
         end

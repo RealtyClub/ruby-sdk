@@ -58,7 +58,7 @@ module MCP
           description description
           arguments arguments
           define_singleton_method(:template) do |args, server_context:|
-            instance_exec(args, server_context:, &block)
+            instance_exec(args, server_context: server_context, &block)
           end
         end
       end
